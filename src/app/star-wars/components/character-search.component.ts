@@ -1,14 +1,5 @@
-import {
-  Component,
-  Output,
-  EventEmitter,
-  Input,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-character-search',

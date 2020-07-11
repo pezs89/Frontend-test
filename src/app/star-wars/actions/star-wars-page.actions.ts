@@ -12,3 +12,7 @@ export const sortCharacters = createAction(
   '[Star Wars Page] Sort Characters',
   props<{ option: SortOption }>()
 );
+
+export const loadMoreCharacters = createAction(
+  '[Star Wars Page] Load More Characters'
+);

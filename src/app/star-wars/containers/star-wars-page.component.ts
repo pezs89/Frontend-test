@@ -15,6 +15,7 @@ import { SortOption } from '../models/sort-option';
 export class StarWarsPageComponent implements OnInit {
   characters$: Observable<StarWarsCharacter[]>;
   sortOptions$: Observable<SortOption[]>;
+  visibleResults$: Observable<number>;
 
   constructor(private store: Store<fromStarWars.State>) {}
 
@@ -24,6 +25,9 @@ export class StarWarsPageComponent implements OnInit {
       select(fromStarWars.selectCharactersAfterSorting)
     );
     this.sortOptions$ = this.store.pipe(select(fromStarWars.selectSortOptions));
+    this.visibleResults$ = this.store.pipe(
+      select(fromStarWars.selectVisibleResultsCount)
+    );
   }
 
   onNewSearchValue(query: string) {
@@ -32,5 +36,9 @@ export class StarWarsPageComponent implements OnInit {
 
   onNewSortValue(option: SortOption) {
     this.store.dispatch(StarWarsPageActions.sortCharacters({ option }));
+  }
+
+  loadMore() {
+    this.store.dispatch(StarWarsPageActions.loadMoreCharacters());
   }
 }

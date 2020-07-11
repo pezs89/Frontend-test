@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { StarWarsCharacter } from '../models/star-wars-character';
 
 @Component({
@@ -8,4 +8,5 @@ import { StarWarsCharacter } from '../models/star-wars-character';
 })
 export class CharactersListComponent {
   @Input() characters: StarWarsCharacter[];
+  @Output() loadMoreCharacters = new EventEmitter();
 }

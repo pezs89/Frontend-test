@@ -15,6 +15,7 @@ export interface State extends EntityState<StarWarsCharacter> {
   query: string;
   selectedSort: SortOption;
   sortOptions: SortOption[];
+  visibleResults: number;
 }
 
 export const adapter: EntityAdapter<StarWarsCharacter> = createEntityAdapter<
@@ -27,6 +28,7 @@ export const initialState: State = adapter.getInitialState({
   searchResultIds: [],
   query: '',
   selectedSort: undefined,
+  visibleResults: 4,
   sortOptions: [
     {
       value: SortDirections.Asc,
@@ -63,6 +65,10 @@ export const reducer = createReducer(
   on(StarWarsApiActions.searchCharactersSuccess, (state, action) => ({
     ...state,
     searchResultIds: action.characters.map((character) => character.name),
+  })),
+  on(StarWarsPageActions.loadMoreCharacters, (state) => ({
+    ...state,
+    visibleResults: state.visibleResults + 4,
   })),
   on(StarWarsPageActions.sortCharacters, (state, action) => ({
     ...state,

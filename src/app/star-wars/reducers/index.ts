@@ -52,12 +52,23 @@ export const selectSelectedSortOption = createSelector(
   (state) => state.selectedSort
 );
 
+export const selectVisibleResultsCount = createSelector(
+  selectStarWarsEntitiesState,
+  (state) => state.visibleResults
+);
+
 export const {
   selectAll: selectStarWarsCollection,
 } = fromStarWarsPage.adapter.getSelectors(selectStarWarsEntitiesState);
 
-export const selectSearchResults = createSelector(
+export const selectSlicedState = createSelector(
   selectStarWarsCollection,
+  selectVisibleResultsCount,
+  (characters, count) => characters.slice(0, count)
+);
+
+export const selectSearchResults = createSelector(
+  selectSlicedState,
   selectSearchResultIds,
   (characters, ids) =>
     ids.length
