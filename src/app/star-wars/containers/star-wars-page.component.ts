@@ -19,11 +19,11 @@ export class StarWarsPageComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(StarWarsPageActions.pageInit());
     this.characters$ = this.store.pipe(
-      select(fromStarWars.selectStarWarsCharacters)
+      select(fromStarWars.selectSearchResults)
     );
   }
 
   onNewSearchValue(query: string) {
-    console.log(query);
+    this.store.dispatch(StarWarsPageActions.searchCharacters({ query }));
   }
 }

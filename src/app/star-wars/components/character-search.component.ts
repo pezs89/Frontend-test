@@ -15,24 +15,17 @@ import { Subject } from 'rxjs';
   templateUrl: 'character-search.component.html',
   styleUrls: ['./character-search.component.scss'],
 })
-export class CharacterSearchComponent implements OnInit, OnDestroy {
+export class CharacterSearchComponent implements OnInit {
   @Input() searchQuery: string;
   @Output() searchValueChange = new EventEmitter<string>();
 
   control: FormControl;
-  private destroy$ = new Subject();
 
   ngOnInit() {
     this.control = new FormControl(this.searchQuery);
-    this.control.valueChanges
-      .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy$))
-      .subscribe((newQuery) => {
-        this.searchValueChange.emit(newQuery);
-      });
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+  onSearchButtonClick() {
+    this.searchValueChange.emit(this.control.value);
   }
 }

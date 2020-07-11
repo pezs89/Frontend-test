@@ -22,5 +22,20 @@ export class StarWarsPageEffects {
     )
   );
 
+  searchCharacters$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StarWarsPageActions.searchCharacters),
+      mergeMap(({ query }) =>
+        this.swapiService.searchForStarWarsCharacters(query).pipe(
+          map((response) =>
+            StarWarsApiActions.searchCharactersSuccess({
+              characters: response.results,
+            })
+          )
+        )
+      )
+    )
+  );
+
   constructor(private swapiService: SwapiService, private actions$: Actions) {}
 }

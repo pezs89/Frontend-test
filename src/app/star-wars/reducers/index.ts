@@ -40,7 +40,18 @@ export const {
   selectAll: selectStarWarsCollection,
 } = fromStarWarsPage.adapter.getSelectors(selectStarWarsEntitiesState);
 
-export const selectStarWarsCharacters = createSelector(
+export const selectSearchResultIds = createSelector(
+  selectStarWarsEntitiesState,
+  (state) => state.searchResultIds
+);
+
+export const selectSearchResults = createSelector(
   selectStarWarsCollection,
-  (entities) => entities
+  selectSearchResultIds,
+  (characters, ids) =>
+    ids.length
+      ? ids
+          .map((id) => characters.find((character) => character.name === id))
+          .filter((item) => item !== undefined)
+      : characters
 );

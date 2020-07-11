@@ -10,3 +10,13 @@ export const loadCharactersFailure = createAction(
   '[Star Wars Characters/API] GET Characters Failure',
   props<{ msg: string }>()
 );
+
+export const searchCharactersSuccess = createAction(
+  '[Star Wars Characters/API] Search Characters Success',
+  props<{ characters: StarWarsCharacter[] }>()
+);
+
+export const searchCharactersFailure = createAction(
+  '[Star Wars Characters/API] Searcj Characters Failure',
+  props<{ msg: string }>()
+);

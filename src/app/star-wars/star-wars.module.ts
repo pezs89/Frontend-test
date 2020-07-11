@@ -5,7 +5,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import * as fromStarWars from './reducers';
 import { StarWarsPageEffects } from './effects/star-wars-page.effects';
@@ -28,7 +29,8 @@ const COMPONENTS = [
     CommonModule,
     StarWarsRoutingModule,
     MatInputModule,
-    MatIconModule,
+    MatButtonModule,
+    MatButtonToggleModule,
     ReactiveFormsModule,
     StoreModule.forFeature(
       fromStarWars.starWarsFeatureKey,

@@ -1,0 +1,15 @@
+.character-search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  &__form-field {
+    width: 100%;
+    @media screen and (min-width: 767px) {
+      width: 33%;
+    }
+  }
+  &__button {
+    width: 180px;
+  }
+}
