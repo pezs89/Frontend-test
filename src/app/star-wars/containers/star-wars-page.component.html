@@ -3,5 +3,9 @@
     [searchQuery]="''"
     (searchValueChange)="onNewSearchValue($event)"
   ></app-character-search>
+  <app-character-sort
+    [options]="sortOptions$ | async"
+    (selectedValueChange)="onNewSortValue($event)"
+  ></app-character-sort>
   <app-characters-list [characters]="characters$ | async"></app-characters-list>
 </section>

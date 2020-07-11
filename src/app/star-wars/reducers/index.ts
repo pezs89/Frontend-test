@@ -36,14 +36,19 @@ export const selectStarWarsEntitiesState = createSelector(
   (state) => state[fromStarWarsPage.starWarsPageFeatureKey]
 );
 
-export const {
-  selectAll: selectStarWarsCollection,
-} = fromStarWarsPage.adapter.getSelectors(selectStarWarsEntitiesState);
-
 export const selectSearchResultIds = createSelector(
   selectStarWarsEntitiesState,
   (state) => state.searchResultIds
 );
+
+export const selectSortOptions = createSelector(
+  selectStarWarsEntitiesState,
+  (state) => state.sortOptions
+);
+
+export const {
+  selectAll: selectStarWarsCollection,
+} = fromStarWarsPage.adapter.getSelectors(selectStarWarsEntitiesState);
 
 export const selectSearchResults = createSelector(
   selectStarWarsCollection,

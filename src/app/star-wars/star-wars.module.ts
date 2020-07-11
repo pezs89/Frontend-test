@@ -6,7 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatSelectModule } from '@angular/material/select';
 
 import * as fromStarWars from './reducers';
 import { StarWarsPageEffects } from './effects/star-wars-page.effects';
@@ -16,12 +16,14 @@ import { StarWarsPageComponent } from './containers/star-wars-page.component';
 import { CharactersListComponent } from './components/characters-list.component';
 import { CharacterCardComponent } from './components/character-card.component';
 import { CharacterSearchComponent } from './components/character-search.component';
+import { CharacterSortComponent } from './components/character-sort.component';
 
 const CONTAINERS = [StarWarsPageComponent];
 const COMPONENTS = [
   CharactersListComponent,
   CharacterCardComponent,
   CharacterSearchComponent,
+  CharacterSortComponent,
 ];
 
 @NgModule({
@@ -30,7 +32,7 @@ const COMPONENTS = [
     StarWarsRoutingModule,
     MatInputModule,
     MatButtonModule,
-    MatButtonToggleModule,
+    MatSelectModule,
     ReactiveFormsModule,
     StoreModule.forFeature(
       fromStarWars.starWarsFeatureKey,

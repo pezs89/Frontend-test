@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import * as fromStarWars from '../reducers';
 import { StarWarsPageActions } from '../actions';
 import { StarWarsCharacter } from '../models/star-wars-character';
+import { SortOption } from '../models/sort-option';
 
 @Component({
   selector: 'app-star-wars-page',
@@ -13,6 +14,7 @@ import { StarWarsCharacter } from '../models/star-wars-character';
 })
 export class StarWarsPageComponent implements OnInit {
   characters$: Observable<StarWarsCharacter[]>;
+  sortOptions$: Observable<SortOption[]>;
 
   constructor(private store: Store<fromStarWars.State>) {}
 
@@ -21,9 +23,14 @@ export class StarWarsPageComponent implements OnInit {
     this.characters$ = this.store.pipe(
       select(fromStarWars.selectSearchResults)
     );
+    this.sortOptions$ = this.store.pipe(select(fromStarWars.selectSortOptions));
   }
 
   onNewSearchValue(query: string) {
     this.store.dispatch(StarWarsPageActions.searchCharacters({ query }));
+  }
+
+  onNewSortValue(newSortValue: SortOption) {
+    console.log(newSortValue);
   }
 }

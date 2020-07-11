@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill">
+  <mat-label>Sort by</mat-label>
+  <mat-select (selectionChange)="onSelectionChange($event)">
+    <mat-option *ngFor="let option of options" [value]="option">
+      {{ option.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
