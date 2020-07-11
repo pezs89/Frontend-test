@@ -22,4 +22,8 @@ export class StarWarsPageComponent implements OnInit {
       select(fromStarWars.selectStarWarsCharacters)
     );
   }
+
+  onNewSearchValue(query: string) {
+    console.log(query);
+  }
 }

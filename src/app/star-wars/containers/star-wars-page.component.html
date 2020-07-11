@@ -1,3 +1,7 @@
 <section class="star-wars-page">
+  <app-character-search
+    [searchQuery]="''"
+    (searchValueChange)="onNewSearchValue($event)"
+  ></app-character-search>
   <app-characters-list [characters]="characters$ | async"></app-characters-list>
 </section>
