@@ -5,6 +5,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { MatSelect } from '@angular/material/select';
 import { SortOption } from '../models/sort-option';
 
 @Component({
@@ -17,7 +18,7 @@ export class CharacterSortComponent {
   @Input() options: SortOption;
   @Output() selectedValueChange = new EventEmitter<SortOption>();
 
-  onSelectionChange(selectedValue: SortOption) {
-    this.selectedValueChange.emit(selectedValue);
+  onSelectionChange(selectedValue: MatSelect) {
+    this.selectedValueChange.emit(selectedValue.value as SortOption);
   }
 }

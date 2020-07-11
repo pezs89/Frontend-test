@@ -6,6 +6,7 @@ import {
 } from '@ngrx/store';
 import * as fromStarWarsPage from './star-wars-page.reducer';
 import * as fromRoot from '../../reducers';
+import { compare } from '../utils/compare';
 
 export const starWarsFeatureKey = 'starWars';
 
@@ -46,6 +47,11 @@ export const selectSortOptions = createSelector(
   (state) => state.sortOptions
 );
 
+export const selectSelectedSortOption = createSelector(
+  selectStarWarsEntitiesState,
+  (state) => state.selectedSort
+);
+
 export const {
   selectAll: selectStarWarsCollection,
 } = fromStarWarsPage.adapter.getSelectors(selectStarWarsEntitiesState);
@@ -59,4 +65,11 @@ export const selectSearchResults = createSelector(
           .map((id) => characters.find((character) => character.name === id))
           .filter((item) => item !== undefined)
       : characters
+);
+
+export const selectCharactersAfterSorting = createSelector(
+  selectSearchResults,
+  selectSelectedSortOption,
+  (characters, sortOption) =>
+    sortOption ? compare(characters, sortOption) : characters
 );

@@ -6,6 +6,7 @@ import { StarWarsCharacter } from '../models/star-wars-character';
 import { SortOption } from '../models/sort-option';
 import { SortDirections } from '../enums/sort-directions';
 import { SortGenders } from '../enums/sort-genders';
+import { SortKeys } from '../enums/sort-keys';
 
 export const starWarsPageFeatureKey = 'starWarsPage';
 
@@ -27,10 +28,26 @@ export const initialState: State = adapter.getInitialState({
   query: '',
   selectedSort: undefined,
   sortOptions: [
-    { value: 'name', order: SortDirections.Asc, viewValue: 'A-Z' },
-    { value: 'name', order: SortDirections.Desc, viewValue: 'Z-A' },
-    { value: 'male', order: SortGenders.Male, viewValue: 'Male' },
-    { value: 'female', order: SortGenders.Female, viewValue: 'Female' },
+    {
+      value: SortDirections.Asc,
+      viewValue: 'A-Z',
+      sortKey: SortKeys.Name,
+    },
+    {
+      value: SortDirections.Desc,
+      viewValue: 'Z-A',
+      sortKey: SortKeys.Name,
+    },
+    {
+      value: SortGenders.Male,
+      viewValue: 'Male',
+      sortKey: SortKeys.Gender,
+    },
+    {
+      value: SortGenders.Female,
+      viewValue: 'Female',
+      sortKey: SortKeys.Gender,
+    },
   ],
 });
 
@@ -46,5 +63,9 @@ export const reducer = createReducer(
   on(StarWarsApiActions.searchCharactersSuccess, (state, action) => ({
     ...state,
     searchResultIds: action.characters.map((character) => character.name),
+  })),
+  on(StarWarsPageActions.sortCharacters, (state, action) => ({
+    ...state,
+    selectedSort: action.option,
   }))
 );

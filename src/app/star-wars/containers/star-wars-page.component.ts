@@ -21,7 +21,7 @@ export class StarWarsPageComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(StarWarsPageActions.pageInit());
     this.characters$ = this.store.pipe(
-      select(fromStarWars.selectSearchResults)
+      select(fromStarWars.selectCharactersAfterSorting)
     );
     this.sortOptions$ = this.store.pipe(select(fromStarWars.selectSortOptions));
   }
@@ -30,7 +30,7 @@ export class StarWarsPageComponent implements OnInit {
     this.store.dispatch(StarWarsPageActions.searchCharacters({ query }));
   }
 
-  onNewSortValue(newSortValue: SortOption) {
-    console.log(newSortValue);
+  onNewSortValue(option: SortOption) {
+    this.store.dispatch(StarWarsPageActions.sortCharacters({ option }));
   }
 }
