@@ -16,6 +16,7 @@ export class StarWarsPageComponent implements OnInit {
   characters$: Observable<StarWarsCharacter[]>;
   sortOptions$: Observable<SortOption[]>;
   visibleResults$: Observable<number>;
+  totalCount$: Observable<number>;
 
   constructor(private store: Store<fromStarWars.State>) {}
 
@@ -28,6 +29,7 @@ export class StarWarsPageComponent implements OnInit {
     this.visibleResults$ = this.store.pipe(
       select(fromStarWars.selectVisibleResultsCount)
     );
+    this.totalCount$ = this.store.pipe(select(fromStarWars.selectTotal));
   }
 
   onNewSearchValue(query: string) {

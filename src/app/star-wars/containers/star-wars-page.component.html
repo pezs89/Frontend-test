@@ -3,6 +3,12 @@
     [searchQuery]="''"
     (searchValueChange)="onNewSearchValue($event)"
   ></app-character-search>
+  <div class="star-wars-page__results-count">
+    Showing <b>{{ (characters$ | async).length }}</b> results of
+    <b>
+      {{ totalCount$ | async }}
+    </b>
+  </div>
   <app-character-sort
     [options]="sortOptions$ | async"
     (selectedValueChange)="onNewSortValue($event)"
