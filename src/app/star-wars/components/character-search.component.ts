@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-character-search',
@@ -10,13 +10,18 @@ export class CharacterSearchComponent implements OnInit {
   @Input() searchQuery: string;
   @Output() searchValueChange = new EventEmitter<string>();
 
-  control: FormControl;
+  searchForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.control = new FormControl(this.searchQuery);
+    this.searchForm = this.fb.group({
+      searchInput: [this.searchQuery],
+    });
   }
 
-  onSearchButtonClick() {
-    this.searchValueChange.emit(this.control.value);
+  onSubmit() {
+    const { searchQuery }: { searchQuery: string } = this.searchForm.value;
+    this.searchValueChange.emit(searchQuery);
   }
 }

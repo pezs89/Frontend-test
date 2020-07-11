@@ -57,9 +57,14 @@ export const selectVisibleResultsCount = createSelector(
   (state) => state.visibleResults
 );
 
+export const selectStarWarsCharactersIsLoading = createSelector(
+  selectStarWarsEntitiesState,
+  (state) => state.loading
+);
+
 export const {
   selectAll: selectStarWarsCollection,
-  selectTotal
+  selectTotal,
 } = fromStarWarsPage.adapter.getSelectors(selectStarWarsEntitiesState);
 
 export const selectSlicedState = createSelector(

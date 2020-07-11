@@ -13,7 +13,16 @@
     [options]="sortOptions$ | async"
     (selectedValueChange)="onNewSortValue($event)"
   ></app-character-sort>
-  <app-characters-list [characters]="characters$ | async"></app-characters-list>
+  <ng-container *ngIf="isLoading$ | async">
+    <div class="star-wars-page__loader">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!(isLoading$ | async)">
+    <app-characters-list
+      [characters]="characters$ | async"
+    ></app-characters-list>
+  </ng-container>
   <button
     class="star-wars-page__load-more"
     mat-raised-button
