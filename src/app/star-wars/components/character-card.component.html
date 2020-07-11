@@ -1,3 +1,9 @@
 <div class="character-card">
-  {{ character | json }}
+  <div class="character-card__image">
+    <img *ngIf="isOdd" src="../../../assets/mock-image-1.png" />
+    <img *ngIf="!isOdd" src="../../../assets/mock-image.png" />
+  </div>
+  <div class="character-card__image">
+    {{ character.name }}
+  </div>
 </div>

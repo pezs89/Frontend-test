@@ -9,4 +9,5 @@ import { StarWarsCharacter } from '../models/star-wars-character';
 })
 export class CharacterCardComponent {
   @Input() character: StarWarsCharacter;
+  @Input() isOdd: boolean;
 }
