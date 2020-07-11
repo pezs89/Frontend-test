@@ -1,9 +1,9 @@
 <div class="character-card">
-  <div class="character-card__image">
-    <img *ngIf="isOdd" src="../../../assets/mock-image-1.png" />
-    <img *ngIf="!isOdd" src="../../../assets/mock-image.png" />
-  </div>
-  <div class="character-card__image">
+  <div
+    class="character-card__image"
+    [ngClass]="{ 'character-card__image--odd': isOdd }"
+  ></div>
+  <div class="character-card__name">
     {{ character.name }}
   </div>
 </div>
