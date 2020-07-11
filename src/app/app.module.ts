@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { StoreModule } from '@ngrx/store';
@@ -19,6 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatToolbarModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     StoreModule.forRoot(ROOT_REDUCERS, {
       metaReducers,
       runtimeChecks: {
