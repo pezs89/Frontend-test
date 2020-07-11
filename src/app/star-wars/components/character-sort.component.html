@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill">
+<mat-form-field class="character-sort" appearance="fill">
   <mat-label>Sort by</mat-label>
   <mat-select (selectionChange)="onSelectionChange($event)">
     <mat-option *ngFor="let option of options" [value]="option">

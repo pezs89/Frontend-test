@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
+import { map, mergeMap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { StarWarsPageActions, StarWarsApiActions } from '../actions';
 import { SwapiService } from 'src/app/core/services/swapi.service';
@@ -16,6 +19,11 @@ export class StarWarsPageEffects {
             StarWarsApiActions.loadCharactersSuccess({
               characters: response.results,
             })
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(
+              StarWarsApiActions.searchCharactersFailure({ msg: error.message })
+            )
           )
         )
       )
@@ -31,11 +39,34 @@ export class StarWarsPageEffects {
             StarWarsApiActions.searchCharactersSuccess({
               characters: response.results,
             })
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(
+              StarWarsApiActions.searchCharactersFailure({ msg: error.message })
+            )
           )
         )
       )
     )
   );
 
-  constructor(private swapiService: SwapiService, private actions$: Actions) {}
+  apiErrors$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          StarWarsApiActions.searchCharactersFailure,
+          StarWarsApiActions.loadCharactersFailure
+        ),
+        map(({ msg }) => {
+          this.matSnackBar.open(msg, null, { duration: 3000 });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  constructor(
+    private swapiService: SwapiService,
+    private actions$: Actions,
+    private matSnackBar: MatSnackBar
+  ) {}
 }
