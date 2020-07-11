@@ -8,7 +8,7 @@ import { StarWarsCharacter } from 'src/app/star-wars/models/star-wars-character'
 export class SwapiService {
   constructor(private http: HttpClient) {}
 
-  getStarWarsCharactersList(): Observable<StarWarsCharacter[]> {
-    return this.http.get<StarWarsCharacter[]>(environment.apiUrl);
+  getStarWarsCharactersList(): Observable<{ results: StarWarsCharacter[] }> {
+    return this.http.get<{ results: StarWarsCharacter[] }>(environment.apiUrl);
   }
 }
