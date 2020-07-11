@@ -10,6 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { ROOT_REDUCERS, metaReducers } from './reducers';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { ROOT_REDUCERS, metaReducers } from './reducers';
     BrowserModule,
     MatToolbarModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     StoreModule.forRoot(ROOT_REDUCERS, {
       metaReducers,
       runtimeChecks: {
@@ -26,9 +28,12 @@ import { ROOT_REDUCERS, metaReducers } from './reducers';
         strictActionTypeUniqueness: true,
       },
     }),
-    StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
       name: 'Star Wars App!',
+    }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState: RouterState.Minimal,
     }),
     EffectsModule.forRoot([]),
   ],
